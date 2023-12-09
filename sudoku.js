@@ -75,13 +75,17 @@ function selectNumber() {
 
 function selectTile() {
     if (numSelected) {
+        // Get the row and column indices from the tile's id
+        const [row, col] = this.id.split("-").map(Number);
 
-        const currentContent = this.innerText;
-
-        if (currentContent !== "") {
-            this.innerText = "";
+        // Check if the clicked tile corresponds to a fixed number
+        if (board[row][col] === "-") {
+            // If not a fixed number, update the content of the clicked tile
+            this.innerText = numSelected.id;
+        } else {
+            // If it's a fixed number, you may choose to handle this differently (e.g., show an error message)
+            console.log("Cannot change the value of a fixed number.");
         }
-
-        this.innerText = numSelected.id;
     }
 }
+
