@@ -29,6 +29,7 @@ const solution = [
 
 window.onload = function() {
     setGame();
+    startTimer(); // Call startTimer() when the window loads
 };
 
 function setGame() {
@@ -75,17 +76,53 @@ function selectNumber() {
 
 function selectTile() {
     if (numSelected) {
-        // Get the row and column indices from the tile's id
         const [row, col] = this.id.split("-").map(Number);
-
-        // Check if the clicked tile corresponds to a fixed number
         if (board[row][col] === "-") {
-            // If not a fixed number, update the content of the clicked tile
             this.innerText = numSelected.id;
         } else {
-            // If it's a fixed number, you may choose to handle this differently (e.g., show an error message)
             console.log("Cannot change the value of a fixed number.");
         }
     }
 }
 
+let startTime;
+let timerInterval;
+
+function startTimer() {
+    startTime = new Date();
+    timerInterval = setInterval(updateTimer, 1000);
+}
+
+function updateTimer() {
+    const currentTime = new Date();
+    const elapsedTimeInSeconds = Math.floor((currentTime - startTime) / 1000);
+
+    const hours = Math.floor(elapsedTimeInSeconds / 3600);
+    const minutes = Math.floor((elapsedTimeInSeconds % 3600) / 60);
+    const seconds = elapsedTimeInSeconds % 60;
+
+    const formattedTime = formatTime(hours, minutes, seconds);
+
+    document.getElementById("timer").innerText = `Time: ${formattedTime}`;
+}
+
+function formatTime(hours, minutes, seconds) {
+    const formattedHours = hours < 10 ? `0${hours}` : hours;
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+    const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+
+    return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+}
+
+function gameCompleted() {
+    stopTimer();
+}
+
+function resetGame() {
+    stopTimer();
+    setGame(); 
+}
