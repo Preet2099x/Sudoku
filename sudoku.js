@@ -1,7 +1,8 @@
 let numSelected = null;
 let tileSelected = null;
 
-let errors = 0;
+let startTime;
+let timerInterval;
 
 const board = [
     "--74916-5",
@@ -27,14 +28,59 @@ const solution = [
     "812945763"
 ];
 
-window.onload = function() {
+window.onload = function () {
     setGame();
+    startTimer(); // Call startTimer() when the window loads
 };
+
+function startTimer() {
+    startTime = new Date();
+    timerInterval = setInterval(updateTimer, 1000);
+}
+
+function updateTimer() {
+    const currentTime = new Date();
+    const elapsedTimeInSeconds = Math.floor((currentTime - startTime) / 1000);
+
+    const hours = Math.floor(elapsedTimeInSeconds / 3600);
+    const minutes = Math.floor((elapsedTimeInSeconds % 3600) / 60);
+    const seconds = elapsedTimeInSeconds % 60;
+
+    const formattedTime = formatTime(hours, minutes, seconds);
+
+    document.getElementById("timer").innerText = `Time: ${formattedTime}`;
+}
+
+function formatTime(hours, minutes, seconds) {
+    const formattedHours = hours < 10 ? `0${hours}` : hours;
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+    const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+
+    return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+}
+
+// Add the following functions to your code where appropriate, e.g., when the game is completed or reset
+
+function gameCompleted() {
+    // Call this function when the player successfully completes the Sudoku puzzle
+    stopTimer();
+    // Add any other actions you want to perform when the game is completed
+}
+
+function resetGame() {
+    // Call this function when you want to reset the game
+    stopTimer();
+    // Reset the board and any other game-related variables
+    setGame(); // Assuming setGame() also handles resetting the board
+}
 
 function setGame() {
     // Digits 1-9
     for (let i = 1; i <= 9; i++) {
-        
         const number = document.createElement("div");
         number.id = i;
         number.innerText = i;
@@ -58,7 +104,7 @@ function setGame() {
             if (c == 2 || c == 5) {
                 tile.classList.add("vertical-line");
             }
-            tile.addEventListener("click", selectTile);
+            tile.addEventListener("click", handleTileClick); // Use a single click event for both setting and removing numbers
             tile.classList.add("tile");
             document.getElementById("board").append(tile);
         }
@@ -73,19 +119,24 @@ function selectNumber() {
     numSelected.classList.add("number-selected");
 }
 
-function selectTile() {
+function handleTileClick() {
     if (numSelected) {
         // Get the row and column indices from the tile's id
         const [row, col] = this.id.split("-").map(Number);
 
         // Check if the clicked tile corresponds to a fixed number
         if (board[row][col] === "-") {
-            // If not a fixed number, update the content of the clicked tile
-            this.innerText = numSelected.id;
+            // If not a fixed number, update/remove the content of the clicked tile based on the current state
+            if (this.innerText === numSelected.id) {
+                // If the number is already set, remove it
+                this.innerText = "";
+            } else {
+                // Otherwise, set the number
+                this.innerText = numSelected.id;
+            }
         } else {
             // If it's a fixed number, you may choose to handle this differently (e.g., show an error message)
             console.log("Cannot change the value of a fixed number.");
         }
     }
 }
-
