@@ -31,6 +31,7 @@ const solution = [
 window.onload = function () {
     setGame();
     startTimer(); // Call startTimer() when the window loads
+    document.addEventListener('keydown', handleKeyPress);
 };
 
 function startTimer() {
@@ -137,6 +138,97 @@ function handleTileClick() {
         } else {
             // If it's a fixed number, you may choose to handle this differently (e.g., show an error message)
             console.log("Cannot change the value of a fixed number.");
+        }
+    }
+}
+
+let checkCount = 0;
+const maxCheckLimit = 3;
+
+function checkSudoku() {
+    if (checkCount < maxCheckLimit) {
+        const currentBoard = getCurrentBoardState();
+        const isCorrect = compareBoards(currentBoard, solution);
+
+        if (isCorrect) {
+            alert("Board is correct so far!");
+        } else {
+            alert("Board has mistakes. Keep trying!");
+        }
+
+        checkCount++;
+
+        if (checkCount === maxCheckLimit) {
+            disableCheckButton();
+        }
+    } else {
+        alert("You've reached the maximum check limit.");
+    }
+}
+
+function disableCheckButton() {
+    const checkButton = document.getElementById("check");
+    checkButton.disabled = true;
+    checkButton.style.opacity = 0.5; // Optionally reduce opacity to indicate it's disabled
+}
+
+
+function getCurrentBoardState() {
+    const currentBoard = [];
+    for (let r = 0; r < 9; r++) {
+        let row = '';
+        for (let c = 0; c < 9; c++) {
+            const tile = document.getElementById(`${r}-${c}`);
+            row += tile.innerText || '-';
+        }
+        currentBoard.push(row);
+    }
+    return currentBoard;
+}
+
+function compareBoards(boardA, boardB) {
+    for (let r = 0; r < 9; r++) {
+        for (let c = 0; c < 9; c++) {
+            if (boardA[r][c] !== boardB[r][c]) {
+                return false; // Returns false if any cell doesn't match
+            }
+        }
+    }
+    return true; // Returns true only if all cells match
+}
+
+
+function submitSudoku() {
+    const currentBoard = getCurrentBoardState();
+    const isCorrect = compareBoards(currentBoard, solution);
+
+    if (isCorrect) {
+        alert("Congratulations! You've completed the Sudoku!");
+        gameCompleted(); // Call the function to handle game completion
+    } else {
+        alert("Board is not yet complete or contains mistakes.");
+    }
+}
+
+function clearBoard() {
+    for (let r = 0; r < 9; r++) {
+        for (let c = 0; c < 9; c++) {
+            const tile = document.getElementById(`${r}-${c}`);
+            if (!tile.classList.contains('tile-start')) {
+                tile.innerText = '';
+            }
+        }
+    }
+}
+
+function handleKeyPress(event) {
+    const key = event.key;
+    if (parseInt(key) >= 1 && parseInt(key) <= 9) {
+        if (numSelected) {
+            const tile = tileSelected || document.querySelector('.tile:hover');
+            if (tile && !tile.classList.contains('tile-start')) {
+                tile.innerText = key;
+            }
         }
     }
 }
