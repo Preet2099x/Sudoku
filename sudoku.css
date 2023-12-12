@@ -82,3 +82,60 @@ hr {
 .vertical-line {
     border-right: 1px solid black;
 }
+
+button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Existing CSS... */
+
+button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out; /* Smooth transition */
+}
+
+button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+button#check {
+    background-color: #008CBA; /* Blue for the Check button */
+}
+
+button#check:hover {
+    background-color: #00688B; /* Darker blue on hover */
+}
+
+button#submit {
+    background-color: #f44336; /* Red for the Submit button */
+}
+
+button#submit:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+}
+
+button#clear {
+    background-color: #ffc107; /* Yellow for the Clear button */
+}
+
+button#clear:hover {
+    background-color: #e0a800; /* Darker yellow on hover */
+}
+
+/* ... Other existing styles ... */
+
+
