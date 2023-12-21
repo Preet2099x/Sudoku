@@ -3,6 +3,11 @@ let tileSelected = null;
 
 let startTime;
 let timerInterval;
+let gameEnded = false;
+let score = 0;
+
+
+
 
 const board = [
     "--74916-5",
@@ -43,9 +48,19 @@ function updateTimer() {
     const currentTime = new Date();
     const elapsedTimeInSeconds = Math.floor((currentTime - startTime) / 1000);
 
-    const hours = Math.floor(elapsedTimeInSeconds / 3600);
-    const minutes = Math.floor((elapsedTimeInSeconds % 3600) / 60);
-    const seconds = elapsedTimeInSeconds % 60;
+    const timeLimitInSeconds = 300; // 5 minutes
+
+    if (elapsedTimeInSeconds >= timeLimitInSeconds) {
+        // Time limit reached, auto-submit the Sudoku
+        submitSudoku();
+        return;
+    }
+
+    const remainingTime = timeLimitInSeconds - elapsedTimeInSeconds;
+
+    const hours = Math.floor(remainingTime / 3600);
+    const minutes = Math.floor((remainingTime % 3600) / 60);
+    const seconds = remainingTime % 60;
 
     const formattedTime = formatTime(hours, minutes, seconds);
 
@@ -150,11 +165,36 @@ function checkSudoku() {
         const currentBoard = getCurrentBoardState();
         const isCorrect = compareBoards(currentBoard, solution);
 
-        if (isCorrect) {
-            alert("Board is correct so far!");
-        } else {
-            alert("Board has mistakes. Keep trying!");
+        for (let r = 0; r < 9; r++) {
+            for (let c = 0; c < 9; c++) {
+                const tile = document.getElementById(`${r}-${c}`);
+                const isFixed = tile.classList.contains('tile-start');
+                const value = currentBoard[r][c];
+
+                // Store the original background color
+                const originalBackgroundColor = tile.style.backgroundColor;
+
+                // Reset styles
+                tile.style.backgroundColor = '';
+
+                if (!isFixed) {
+                    // Highlight correct and incorrect cells
+                    if (value === solution[r][c]) {
+                        tile.style.backgroundColor = 'lightgreen'; // Correct cells in light green
+                    } else {
+                        tile.style.backgroundColor = 'lightcoral'; // Incorrect cells in light coral
+                    }
+                }
+
+                // Reset the color after a delay (3000 milliseconds or 3 seconds)
+                setTimeout(() => {
+                    tile.style.backgroundColor = originalBackgroundColor;
+                }, 3000);
+            }
         }
+
+        // You can choose whether or not to show an alert
+        // alert(isCorrect ? "Board is correct so far!" : "Board has mistakes.");
 
         checkCount++;
 
@@ -165,6 +205,7 @@ function checkSudoku() {
         alert("You've reached the maximum check limit.");
     }
 }
+
 
 function disableCheckButton() {
     const checkButton = document.getElementById("check");
@@ -199,16 +240,34 @@ function compareBoards(boardA, boardB) {
 
 
 function submitSudoku() {
-    const currentBoard = getCurrentBoardState();
-    const isCorrect = compareBoards(currentBoard, solution);
+    if (!gameEnded) {
+        const currentBoard = getCurrentBoardState();
 
-    if (isCorrect) {
-        alert("Congratulations! You've completed the Sudoku!");
-        gameCompleted(); // Call the function to handle game completion
-    } else {
-        alert("Board is not yet complete or contains mistakes.");
+        stopTimer(); // Stop the timer when the user submits
+
+        // Calculate the score (for example, based on completion time)
+        const currentTime = new Date();
+        const elapsedTimeInSeconds = Math.floor((currentTime - startTime) / 1000);
+        score = calculateScore(currentBoard);
+
+        // Display the score
+        displayScore();
+
+        // You can choose to keep or remove the following line based on your preference
+        // gameCompleted(); // Call the function to handle game completion
+
+        // Set the flag to indicate the game has ended
+        gameEnded = true;
     }
 }
+
+
+
+
+
+
+
+
 
 function clearBoard() {
     for (let r = 0; r < 9; r++) {
@@ -231,4 +290,37 @@ function handleKeyPress(event) {
             }
         }
     }
+}
+
+function calculateScore(currentBoard) {
+    let score = 0;
+
+    for (let r = 0; r < 9; r++) {
+        for (let c = 0; c < 9; c++) {
+            if (currentBoard[r][c] === solution[r][c]) {
+                // Increment the score by 5 for each correct tile
+                score += 5;
+            }
+        }
+    }
+
+    return score;
+}
+
+
+
+// Function to display the score popup
+function displayScore() {
+    const scorePopup = document.getElementById('scorePopup');
+    const scoreValue = document.getElementById('scoreValue');
+
+
+    scoreValue.textContent = `Score: ${score}`;
+    scorePopup.style.display = 'block';
+}
+
+// Function to close the score popup
+function closeScorePopup() {
+    const scorePopup = document.getElementById('scorePopup');
+    scorePopup.style.display = 'none';
 }
