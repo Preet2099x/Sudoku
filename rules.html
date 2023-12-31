@@ -3,78 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sudoku Rules</title>
+    <title>Rules</title>
     <style>
-        body {
-            font-family: 'Press Start 2P', sans-serif;
+        @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: "Quicksand", sans-serif;
+        }
+
+        body {
+            background-color: #111;
+            color: #ffffff;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
             height: 100vh;
-            background-color: #000;
-            color: #fff;
         }
 
-        #rulesContainer {
-            max-width: 600px;
-            padding: 20px;
-            background-color: #333;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            border-radius: 8px;
-            text-align: center;
+        h1 {
+            margin-bottom: 50px;
+            padding-top: 50px;
         }
 
-        h1, p {
-            color: #fff;
+        #bulletPoints {
+            list-style: none;
+            font-size: 25px;
+            color: rgb(237, 212, 100);
+            padding-left: 0;
         }
 
-        ol {
-            text-align: left;
+        #bulletPoints li {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 30px;
+            line-height: 2.0;
         }
 
-        #startButton {
+        #bulletPoints li::before {
+            content: '\2022';
+            color: rgb(237, 212, 100);
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .neon-button {
+            display: none; /* Initially hide the button */
+            position: relative;
             display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #4caf50;
-            color: #000;
+            padding: 15px 30px;
+            color: rgb(237, 212, 100);
+            text-transform: uppercase;
+            letter-spacing: 4px;
             text-decoration: none;
-            border: none;
-            border-radius: 4px;
-            transition: background-color 0.3s;
+            font-size: 24px;
+            overflow: hidden;
+            transition: 0.2s;
         }
 
-        #startButton:hover {
-            background-color: #45a049;
+        .neon-button:hover {
+            color: #255784;
+            background: rgb(237, 212, 100);
+            box-shadow: 0 0 10px rgb(237, 212, 100), 0 0 40px rgb(237, 212, 100), 0 0 80px rgb(237, 212, 100);
+            transition-delay: 1s;
+        }
+
+        .neon-button span {
+            position: absolute;
+            display: block;
+        }
+
+        .neon-button span:nth-child(1) {
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgb(237, 212, 100));
+        }
+
+        .neon-button:hover span:nth-child(1) {
+            left: 100%;
+            transition: 1s;
+        }
+
+        .neon-button span:nth-child(3) {
+            bottom: 0;
+            right: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(270deg, transparent, rgb(237, 212, 100));
+        }
+
+        .neon-button:hover span:nth-child(3) {
+            right: 100%;
+            transition: 1s;
+            transition-delay: 0.5s;
+        }
+
+        .neon-button span:nth-child(2) {
+            top: -100%;
+            right: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, rgb(237, 212, 100));
+        }
+
+        .neon-button:hover span:nth-child(2) {
+            top: 100%;
+            transition: 1s;
+            transition-delay: 0.25s;
+        }
+
+        .neon-button span:nth-child(4) {
+            bottom: -100%;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(360deg, transparent, #2196f3);
+        }
+
+        .neon-button:hover span:nth-child(4) {
+            bottom: 100%;
+            transition: 1s;
+            transition-delay: 0.75s;
         }
     </style>
 </head>
 <body>
 
-    <div id="rulesContainer">
-        <h1>Sudoku Rules</h1>
+    <h1>SUDOKU RULES</h1>
 
-        <p>Sudoku is a mind-numbing number puzzle game. The rules are as simple as your intellect:</p>
+    <ul id="bulletPoints">
+        <!-- Bullets will be dynamically added here using JavaScript -->
+    </ul>
 
-        <ol>
-            <li>Fill the grid so that each row, each column, and each of the nine 3×3 subgrids contain all of the numbers from 1 to 9.</li>
-            <br>
-            <li>Use the "Check" button to verify your progress. You can only use "Check" 3 times </li>
-            <br>
-            <li>Your goal is to complete the puzzle as quickly as possible with the highest score. The score is calculated based on the number of correct cells filled..</li>
-            <br>
-            <li>The game has a time limit of 5 minutes. If the time runs out, the puzzle will be automatically submitted. Not that anyone cares about your failure anyway.</li>
-        </ol>
+<!-- Include the neon button here -->
+<a href="sudoku.html" class="neon-button" id="neonButton" style="display: none;">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    START
+</a>
+   
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    // Array of bullet points
+    var points = [
+        "Fill the grid so that each row, each column, and each of the nine 3×3 subgrids contain all of the numbers from 1 to 9.",
+        "Use the 'Check' button to verify your progress. You can only use 'Check' 3 times.",
+        "The score is calculated based on the number of correct cells filled.",
+        "The game has a time limit of 5 minutes. If the time runs out, the puzzle will be automatically submitted.",
+        "Your goal is to complete the puzzle as quickly as possible with the highest score."
+    ];
 
-        <p>Enjoy playing Sudoku! Or try not to embarrass yourself too much.</p>
+    // Get the ul element
+    var ul = document.getElementById("bulletPoints");
 
-        <!-- Start Sudoku Game Button -->
-        <a href="sudoku.html" id="startButton">Start Sudoku Game</a>
-    </div>
+    // Display each point with a typing effect
+    function displayPoints(index) {
+        if (index < points.length) {
+            var li = document.createElement("li");
+            ul.appendChild(li);
+            typeText(li, points[index], function() {
+                // Recursively call the function for the next point
+                displayPoints(index + 1);
+            });
+        } else {
+            // All bullet points are displayed, show the login button and neon button
+            document.getElementById("neonButton").style.display = "inline-block";
+        }
+    }
+
+    // Function to simulate typing effect
+    function typeText(element, text, callback) {
+        var i = 0;
+        var interval = setInterval(function() {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+            } else {
+                clearInterval(interval);
+                // Call the callback function after the typing is complete
+                setTimeout(callback, 1000); // Wait for 1 second before starting the next line
+            }
+        }, 50); // Adjust the typing speed (in milliseconds) as needed
+    }
+
+    // Start the process with the first point
+    displayPoints(0);
+});
+    </script>
 
 </body>
 </html>
