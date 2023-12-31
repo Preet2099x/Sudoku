@@ -318,23 +318,30 @@ function calculateScore(currentBoard) {
 // Function to display the score popup
 // Function to display the score popup
 function displayScore() {
-  const scorePopup = document.getElementById("scorePopup");
-  const scoreValue = document.getElementById("scoreValue");
+    const scorePopup = document.getElementById("scorePopup");
+    const scoreValue = document.getElementById("scoreValue");
 
-  // Calculate the time taken
-  const currentTime = new Date();
-  const elapsedTimeInSeconds = Math.floor((currentTime - startTime) / 1000);
+    // Fetch the saved data from local storage
+    const name = localStorage.getItem("name");
+    const enrollmentNumber = localStorage.getItem("enrollmentNumber");
+    const semester = localStorage.getItem("semester");
+    const college = localStorage.getItem("college");
 
-  const hours = Math.floor(elapsedTimeInSeconds / 3600);
-  const minutes = Math.floor((elapsedTimeInSeconds % 3600) / 60);
-  const seconds = elapsedTimeInSeconds % 60;
+    // Calculate the time taken
+    const currentTime = new Date();
+    const elapsedTimeInSeconds = Math.floor((currentTime - startTime) / 1000);
 
-  const formattedTime = formatTime(hours, minutes, seconds);
+    const hours = Math.floor(elapsedTimeInSeconds / 3600);
+    const minutes = Math.floor((elapsedTimeInSeconds % 3600) / 60);
+    const seconds = elapsedTimeInSeconds % 60;
 
-  // Display the score and time
-  scoreValue.textContent = `Score: ${score} | Time: ${formattedTime}`;
-  scorePopup.style.display = "block";
+    const formattedTime = formatTime(hours, minutes, seconds);
+
+    // Display the score, time, and user data
+    scoreValue.textContent = `Score: ${score} | Time: ${formattedTime} | Name: ${name} | Enrollment Number: ${enrollmentNumber} | Semester: ${semester} | College: ${college}`;
+    scorePopup.style.display = "block";
 }
+
 
 
 // Function to close the score popup
