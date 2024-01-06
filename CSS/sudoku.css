@@ -182,3 +182,19 @@ button#clear:hover {
 #scoreValue span {
     margin-bottom: 5px;
 }
+
+#images{
+    display: flex;
+    height: 65px;
+    justify-content: center;
+}
+
+#logo {
+    position: absolute;
+    top: 1px;
+    right: 5px;
+}
+
+#logo img {
+    height: 120px; 
+}

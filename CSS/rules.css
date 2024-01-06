@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rules</title>
-    <style>
         @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
         * {
             margin: 0;
@@ -20,6 +13,7 @@
             flex-direction: column;
             align-items: center;
             height: 100vh;
+            margin-top: 50px;
         }
 
         h1 {
@@ -68,7 +62,17 @@
             color: #255784;
             background: rgb(237, 212, 100);
             box-shadow: 0 0 10px rgb(237, 212, 100), 0 0 40px rgb(237, 212, 100), 0 0 80px rgb(237, 212, 100);
-            transition-delay: 1s;
+            transition: color 0.2s, background 0.2s;
+            animation: glow 1.5s infinite; /* Added animation for infinite glow */
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 10px rgb(237, 212, 100), 0 0 40px rgb(237, 212, 100), 0 0 80px rgb(237, 212, 100);
+            }
+            50% {
+                box-shadow: 0 0 20px rgb(237, 212, 100), 0 0 60px rgb(237, 212, 100), 0 0 120px rgb(237, 212, 100);
+            }
         }
 
         .neon-button span {
@@ -122,7 +126,7 @@
             left: 0;
             width: 2px;
             height: 100%;
-            background: linear-gradient(360deg, transparent, #2196f3);
+            background: linear-gradient(360deg, transparent,  rgb(237, 212, 100));
         }
 
         .neon-button:hover span:nth-child(4) {
@@ -130,73 +134,23 @@
             transition: 1s;
             transition-delay: 0.75s;
         }
-    </style>
-</head>
-<body>
 
-    <h1>SUDOKU RULES</h1>
-
-    <ul id="bulletPoints">
-        <!-- Bullets will be dynamically added here using JavaScript -->
-    </ul>
-
-<!-- Include the neon button here -->
-<a href="sudoku.html" class="neon-button" id="neonButton" style="display: none;">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    START
-</a>
-   
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-    // Array of bullet points
-    var points = [
-        "Fill the grid so that each row, each column, and each of the nine 3×3 subgrids contain all of the numbers from 1 to 9.",
-        "Use the 'Check' button to verify your progress. You can only use 'Check' 3 times.",
-        "The score is calculated based on the number of correct cells filled.",
-        "The game has a time limit of 5 minutes. If the time runs out, the puzzle will be automatically submitted.",
-        "Your goal is to complete the puzzle as quickly as possible with the highest score."
-    ];
-
-    // Get the ul element
-    var ul = document.getElementById("bulletPoints");
-
-    // Display each point with a typing effect
-    function displayPoints(index) {
-        if (index < points.length) {
-            var li = document.createElement("li");
-            ul.appendChild(li);
-            typeText(li, points[index], function() {
-                // Recursively call the function for the next point
-                displayPoints(index + 1);
-            });
-        } else {
-            // All bullet points are displayed, show the login button and neon button
-            document.getElementById("neonButton").style.display = "inline-block";
+        #images {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            position: absolute;
+            margin-top: -50px;
+            
         }
-    }
 
-    // Function to simulate typing effect
-    function typeText(element, text, callback) {
-        var i = 0;
-        var interval = setInterval(function() {
-            if (i < text.length) {
-                element.textContent += text.charAt(i);
-                i++;
-            } else {
-                clearInterval(interval);
-                // Call the callback function after the typing is complete
-                setTimeout(callback, 1000); // Wait for 1 second before starting the next line
-            }
-        }, 30); // Adjust the typing speed (in milliseconds) as needed
-    }
+        #images #AJU {
+            height: 80px;
+            margin-left: 30px;
+            margin-top: 10px;
+        }
 
-    // Start the process with the first point
-    displayPoints(0);
-});
-    </script>
-
-</body>
-</html>
+        #images #CC {
+            height: 140px;
+            margin-right: 30px;
+        }

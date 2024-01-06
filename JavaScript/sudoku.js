@@ -338,7 +338,7 @@ function displayScore() {
     const formattedTime = formatTime(hours, minutes, seconds);
 
     // Display the score, time, and user data
-    scoreValue.textContent = `Score: ${score} | Time: ${formattedTime} | Name: ${name} | Enrollment Number: ${enrollmentNumber} | Semester: ${semester} | College: ${college}`;
+    scoreValue.innerHTML = `Score: ${score} <br> Time: ${formattedTime} <br><br> Name: ${name} <br> Enrollment Number: ${enrollmentNumber} <br> Semester: ${semester} <br> College: ${college}`;
     scorePopup.style.display = "block";
 }
 

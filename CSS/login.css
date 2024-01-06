@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
+   @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
         * {
             margin: 0;
             padding: 0;
@@ -14,14 +7,15 @@
         }
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             background: #111;
             width: 100%;
             overflow: hidden;
+            
         }
-        /*
         .ring {
             position: relative;
             width: 500px;
@@ -29,6 +23,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-top: 40px;
         }
         .ring i {
             position: absolute;
@@ -68,7 +63,6 @@
                 transform: rotate(0deg);
             }
         }
-        */
         .login {
             position: absolute;
             width: 300px;
@@ -124,68 +118,22 @@
             color: #fff;
             text-decoration: none;
         }
-    </style>
-</head>
-<body>
-    <!--ring div starts here-->
-    <!--
-    <div class="ring">
-        <i style="--clr:#00ff0a;"></i>
-        <i style="--clr:#ff0057;"></i>
-        <i style="--clr:#fffd44;"></i>
-    </div>
-    -->
-    <!--ring div ends here-->
 
-    <div class="login">
-        <h2>SUDOKU</h2>
-        <form id="sudokuForm" onsubmit="return submitForm()">
-            <div class="inputBx">
-                <input type="text" placeholder="Enter Name" required>
-            </div>
-            <br>
-            <div class="inputBx">
-                <input type="text" placeholder="Enrollment Number" required>
-            </div>
-            <br>
-            <div class="inputBx">
-                <input type="text" placeholder="Semester" required>
-            </div>
-            <br>
-            <div class="inputBx">
-                <input type="text" placeholder="College" required>
-            </div>
-            <br>
-            <div class="inputBx">
-                <input type="submit" value="Submit" onclick="submitForm()" required>
-            </div>
-        </form>
-    </div>
-
-    <script>
-        function submitForm() {
-            // Get user input
-            const name = document.querySelector('input[placeholder="Enter Name"]').value;
-            const enrollmentNumber = document.querySelector('input[placeholder="Enrollment Number"]').value;
-            const semester = document.querySelector('input[placeholder="Semester"]').value;
-            const college = document.querySelector('input[placeholder="College"]').value;
-
-            // Check if any field is empty
-            if (!name || !enrollmentNumber || !semester || !college) {
-                return false;  // Prevent form submission
-            }
-
-            // Save the data to local storage
-            localStorage.setItem("name", name);
-            localStorage.setItem("enrollmentNumber", enrollmentNumber);
-            localStorage.setItem("semester", semester);
-            localStorage.setItem("college", college);
-
-            // Redirect to rules.html
-            window.location.href = "rules.html";
-
-            return false;  // Ensure the form does not submit in the traditional way
+        #images img{
+            height: 80px;
+            margin-top: -50px;
         }
-    </script>
-</body>
-</html>
+
+#logo {
+    position: absolute; /* Keep it as absolute positioning */
+    top: 20px;
+    right: 20px;
+}
+
+#logo img {
+    height: 120px; /* Adjust the height of the logo as needed */
+    width: auto; /* Allow the width to adjust automatically */
+    max-width: 100%; /* Ensure the image doesn't exceed its container */
+}
+
+     
