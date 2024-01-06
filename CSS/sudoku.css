@@ -137,7 +137,6 @@ button#clear:hover {
 }
 
 /* Styles for Popup */
-/* Styles for Popup */
 .popup {
     display: none;
     position: fixed;
@@ -157,7 +156,12 @@ button#clear:hover {
     padding: 20px;
     border-radius: 5px;
     text-align: center;
+
+    /* Increase height and width */
+    width: 250px;
+    height: 250px;
 }
+
 
 
 .close {
