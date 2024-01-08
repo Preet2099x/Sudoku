@@ -155,6 +155,8 @@ body {
     max-width: 100%;
 }
 
+
+
 #details {
     display: flex;
     flex-direction: column;
@@ -163,9 +165,25 @@ body {
     bottom: 0;
     left: 0;
     width: 80vw;
-    max-width: 300px;
+    max-width: none;
     padding: 20px;
+    font-size: large;
 }
+
+#details a{
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s ease; /* Adding a smooth color transition on hover */
+}
+
+#details a:visited {
+    color: #fff; /* Set the same color as the regular state or choose a different color */
+}
+
+#details a:hover {
+    color: rgba(255, 225, 0, 0.906)/* Set the desired color on hover */
+}
+
 
 @media (max-width: 600px) {
     .ring {
