@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku</title>
+    <link rel="stylesheet" href="/CSS/sudoku.css">
+    
+</head>
+<body>
+    <div id="images">
+        <img src="/CSS/Images/AJU.png" alt="">
+    </div>
+
+    <!-- <div id="logo">
+        <img src="/CSS/Images/CodingClub.png" alt="Logo">
+    </div> -->
+
+    <hr>
+    <div id="timer"></div>
+    <br>
+
+    <!-- 9x9 board -->
+    <div id="board"></div>
+    <br>
+    <div id="digits"></div>
+
+
+    <!-- Buttons -->
+    <button id="check" onclick="checkSudoku()">Check</button>
+    <button id="submit" onclick="submitSudoku()">Submit</button>
+    <button id="clear" onclick="clearBoard()">Clear</button>
+
+   <!-- Score Popup -->
+    <div id="scorePopup" class="popup">
+        <div class="popup-content">
+            <h2>RESULT</h2>
+            <p id="scoreValue">100</p>
+        </div>
+    </div>
+
+<script src="/JavaScript/sudoku2.js"></script>
+    
+</body>
+</html>
