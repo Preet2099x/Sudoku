@@ -45,7 +45,7 @@ function updateTimer() {
   const currentTime = new Date();
   const elapsedTimeInSeconds = Math.floor((currentTime - startTime) / 1000);
 
-  const timeLimitInSeconds = 300; // 5 minutes
+  const timeLimitInSeconds = 600; // 5 minutes
 
   if (elapsedTimeInSeconds >= timeLimitInSeconds) {
     // Time limit reached, auto-submit the Sudoku
