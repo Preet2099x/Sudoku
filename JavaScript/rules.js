@@ -4,7 +4,7 @@
             "Fill the grid so that each row, each column, and each of the nine 3×3 subgrids contain all of the numbers from 1 to 9.",
             "Use the 'Check' button to verify your progress. You can only use 'Check' 3 times.",
             "The score is calculated based on the number of correct cells filled.",
-            "The game has a time limit of 5 minutes. If the time runs out, the puzzle will be automatically submitted.",
+            "The game has a time limit of 10 minutes. If the time runs out, the puzzle will be automatically submitted.",
             "Your goal is to complete the puzzle as quickly as possible with the highest score."
         ];
 
