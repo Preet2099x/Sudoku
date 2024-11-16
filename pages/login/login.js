@@ -18,7 +18,7 @@
         localStorage.setItem("college", college);
 
         // Redirect to rules.html
-        window.location.href = "/HTML/rules.html";
+        window.location.href = "/pages/rules/rules.html";
 
         return false;  // Ensure the form does not submit in the traditional way
     }
