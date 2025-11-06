@@ -17,8 +17,8 @@
         localStorage.setItem("semester", semester);
         localStorage.setItem("college", college);
 
-        // Redirect to rules.html
-        window.location.href = "/pages/rules/rules.html";
+    // Redirect to the difficulty-choose page (new flow)
+    window.location.href = "/pages/choose/choose.html";
 
         return false;  // Ensure the form does not submit in the traditional way
     }

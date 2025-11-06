@@ -18,6 +18,28 @@
             ul.appendChild(li);
         }
 
-        // Show the login button and neon button
-        document.getElementById("neonButton").style.display = "inline-block";
+        // Show the neon button
+        var neon = document.getElementById("neonButton");
+        neon.style.display = "inline-block";
+
+        // Read chosen difficulty from localStorage (set by choose page)
+        var chosen = localStorage.getItem('chosenDifficulty') || 'medium';
+
+        // Optionally display chosen difficulty to the user
+        var disp = document.getElementById('chosenDiffDisplay');
+        if (disp) {
+            disp.style.display = 'block';
+            disp.textContent = 'Selected difficulty: ' + (chosen === 'hard' ? 'Hard' : 'Medium');
+            disp.style.color = '#fff';
+        }
+
+        // When user clicks START, navigate to the appropriate sudoku page
+        neon.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (chosen === 'hard') {
+                window.location.href = '/pages/sudoku/sudoku2.html';
+            } else {
+                window.location.href = '/pages/sudoku/sudoku.html';
+            }
+        });
     });
