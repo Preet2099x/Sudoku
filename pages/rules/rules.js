@@ -29,7 +29,7 @@
         var disp = document.getElementById('chosenDiffDisplay');
         if (disp) {
             disp.style.display = 'block';
-            disp.textContent = 'Selected difficulty: ' + (chosen === 'hard' ? 'Hard' : 'Medium');
+            // disp.textContent = 'Selected difficulty: ' + (chosen === 'hard' ? 'Hard' : 'Medium');
             disp.style.color = '#fff';
         }
 
